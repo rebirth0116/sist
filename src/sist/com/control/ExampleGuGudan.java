@@ -292,9 +292,9 @@ public class ExampleGuGudan {
 //		e.starEx1(6);
 //		e.starEx2(5);
 //		e.starEx2While(5);
-//		e.starEx3(5);
-//		e.starEx4(5);
-//		e.starEx5(5);
+		e.starEx3(5);
+		e.starEx4(5);
+		e.starEx5(5);
 //		e.starExLine1(5);
 		e.starExLine2(5);
 	}

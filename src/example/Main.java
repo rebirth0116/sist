@@ -81,11 +81,12 @@ public class Main {
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = br.readLine();
 		}
+		
 		sameDelete(arr);
 //		Arrays.sort(arr);
 //		checkNum(arr);
 //		deleteNull(arr);
-//		printAns(arr);
+		printAns(arr);
 		
 		
 

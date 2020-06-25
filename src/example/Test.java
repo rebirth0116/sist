@@ -9,7 +9,7 @@ public class Test {
 	static int n, cnt, index;
 	static String temp;
 
-	public static String[] sameDelete(String[] arr) {
+	public static void sameDelete(String[] arr) {
 		for (int i = 0; i < arr.length - 1; i++) {
 			for (int j = i + 1; j < arr.length; j++) {
 				if (arr[i].equals(arr[j])) {
@@ -18,25 +18,7 @@ public class Test {
 				}
 			}
 		}
-		String[] output = new String[n - cnt];
-		for (int i = 0; i < output.length; i++) {
-			int j = i;
-			while (j < arr.length) {
-				if (!(arr[j].isEmpty()) && arr[j] != null) {
-					output[i] = arr[j];
-					index = j;
-					break;
-				}
-			}
-//			for(int j = i; j<arr.length; j++) {
-//				if(!(arr[j].isEmpty())&&arr[j]!=null) {
-//					output[i]=arr[j];
-//					index = j;
-//					break;
-//				}
-//			}
-		}
-		return output;
+
 	}
 
 	public static void checkNum(String[] arr) {
@@ -76,10 +58,25 @@ public class Test {
 		}
 	}
 
-	public static void deleteNull(String[] arr) {
-		for (int i = 0; i < arr.length; i++) {
-
+	public static String[] deleteNull(String[] arr) {
+		String[] output = new String[n - cnt];
+		for (int i = 0; i < output.length; i++) {
+			for(int j = i; j<arr.length; j++) {
+//				if(!(arr[j].isEmpty())&&arr[j]!=null) {
+//					output[i]=arr[j];
+//					index = j;
+//					break;
+//				}
+				
+				if((arr[j].isEmpty())&&arr[j]!=null) {
+					j++;
+				}else {
+					output[i] = arr[j];
+					break;
+				}
+			}
 		}
+		return output;
 
 	}
 
@@ -91,7 +88,8 @@ public class Test {
 			arr[i] = br.readLine();
 		}
 		String[] result;
-		result = sameDelete(arr);
+		sameDelete(arr);
+		result = deleteNull(arr);
 //		Arrays.sort(arr);
 //		checkNum(arr);
 //		deleteNull(arr);
