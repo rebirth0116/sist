@@ -20,7 +20,7 @@ public class ArrayEx3 {
 		
 		
 //		for(int i:arr) {
-//			i=sc.nextInt();         향상된 for문은 read만 가능하고 write는 불가능하다
+//			i=sc.nextInt();         향상된 for문은 read만 가능하고 write는 불가능하다	
 //		}
 		
 		
@@ -34,5 +34,13 @@ public class ArrayEx3 {
 		int []m2 = {1,2,3,4,5};
 //		a.print(m1);
 		a.arrayPractice();
+		
+		int[] p = {1,2,3,4};
+		int[] q = new int[8];
+		q=p;
+		for(int i = 0; i<q.length;i++) {
+			System.out.println(q[i]);
+		}
+		
 	}
 }

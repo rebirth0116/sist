@@ -282,21 +282,46 @@ public class ExampleGuGudan {
 		}
 	}
 	
+	//사각형 그리기
+	public void starEx6(int num){
+		for(int i = 0; i<num; i++) {
+			for(int j = 0; j<num; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+	
+	//평행사변형 그리기
+	public void starEx7(int num) {
+		for (int i = 1; i <= num; i++) {
+			for (int j =  num - i; j > 0; j--) {
+				System.out.print(" ");
+			}
+			for (int k = 0; k <=num; k++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		ExampleGuGudan e = new ExampleGuGudan();
-//		e.gugudanFor();
-//		e.gugudanWhile();
-//		e.gugudanForEx();
-//		e.gugudanWhileEx();
-//		e.starEx1(6);
-//		e.starEx2(5);
-//		e.starEx2While(5);
+		e.gugudanFor();
+		e.gugudanWhile();
+		e.gugudanForEx();
+		e.gugudanWhileEx();
+		e.starEx1(6);
+		e.starEx2(5);
+		e.starEx2While(5);
 		e.starEx3(5);
 		e.starEx4(5);
 		e.starEx5(5);
-//		e.starExLine1(5);
+		e.starExLine1(5);
 		e.starExLine2(5);
+		e.starEx6(5);
+		e.starEx7(5);
 	}
 
 }
