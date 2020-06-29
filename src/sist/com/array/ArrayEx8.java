@@ -9,32 +9,30 @@ public class ArrayEx8 {
 	}
 
 	public void delete(int[] arr, int num) {
-		
+
 		int index = search(arr, num);
-		
-		
-		
-		for(int i = index; i<arr.length-1; i++) {
-			arr[i] = arr[i+1];
-			arr[i+1] = 0;
+		if (index >= 0) {
+			for (int i = index; i < arr.length - 1; i++) {
+				arr[i] = arr[i + 1];
+				arr[i + 1] = 0;
+			}
 		}
-		
 	}
-	
+
 	public int search(int[] arr, int num) {
-		for(int i = 0; i<arr.length; i++) {
-			if(arr[i] == num) return i;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == num)
+				return i;
 		}
 		return -1;
 	}
-	
+
 	public void modify(int[] arr, int before, int after) {
 		int index = search(arr, before);
-		arr[index] = after;
+		if(index>=0) arr[index] = after;
 	}
 
-	
-	//전부 다 
+	// 전부 다
 	public int[] search(int[] arr, int num, char a) {
 		int[] index = new int[5];
 		int c = 0;
@@ -55,14 +53,14 @@ public class ArrayEx8 {
 			return;
 		} else {
 			for (int i = count; i >= 0; i--) {
-				for(int j = index[i]; j<index.length-1; j++) {
-					arr[j] = arr[j+1];
-					arr[j+1]=0;
+				for (int j = index[i]; j < index.length - 1; j++) {
+					arr[j] = arr[j + 1];
+					arr[j + 1] = 0;
 				}
 			}
 		}
 	}
-	
+
 	public void modify(int[] arr, int num, int change, char a) {
 		count = -1;
 		int[] index = search(arr, num, a);
@@ -71,12 +69,11 @@ public class ArrayEx8 {
 			return;
 		} else {
 			for (int i = count; i >= 0; i--) {
-				arr[index[i]]=change;
+				arr[index[i]] = change;
 			}
 		}
 
 	}
-	
 
 	public void disp(int[] m) {
 		for (int i : m) {
