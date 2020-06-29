@@ -134,7 +134,7 @@ public class ArrayEx4 {
 		for (int i = 0; i < lotto.length; i++) {
 			do {
 				temp = getRanNum();
-				check = checkSame(temp, lotto);
+				check = checkSame(temp, lotto,i);
 
 			} while (check);
 			lotto[i] = temp;
@@ -148,10 +148,10 @@ public class ArrayEx4 {
 	}
 
 	// 배열에 같은 숫자 있는지확인. 같은 수가 있으면 true 반환
-	public boolean checkSame(int n, int[] arr) {
+	public boolean checkSame(int n, int[] arr, int m) {
 		boolean check = true;
 
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < m+1; i++) {
 			if (n == arr[i]) {
 				check = true;
 				break;
@@ -205,8 +205,8 @@ public class ArrayEx4 {
 //		a.mergeSort(input, 0, number-1);
 //		a.disp(input);
 //		a.printMax(input, 2);
-//		a.printLotto();
+		a.printLotto();
 //		a.avgCount(input);
-		a.charDemo();
+//		a.charDemo();
 	}
 }
