@@ -3,7 +3,6 @@ package sist.com.array;
 public class ArrayEx8_2 {
 	int cnt = 0;
 	int x = 0;
-	int temp = 0;
 	
 	public void add(int[][] arr, int num) {
 		if(cnt==arr[x].length) {
@@ -26,6 +25,14 @@ public class ArrayEx8_2 {
 		return -1;
 	}
 	
+	public void modify(int[][] arr, int num, int change) {
+		
+	}
+	
+	public void delete (int[][] arr, int num) {
+		
+	}
+	
 	public void disp(int[][] arr) {
 		for(int i = 0; i<arr.length; i++) {
 			for(int j = 0; j<arr[i].length; j++) {
@@ -33,7 +40,7 @@ public class ArrayEx8_2 {
 			}
 			System.out.println();
 		}
-		System.out.println("-----------------");
+		System.out.println("------------------");
 	}
 	
 	public static void main(String[] args) {
@@ -47,6 +54,7 @@ public class ArrayEx8_2 {
 		a.add(arr, 50);
 		a.add(arr, 60);
 		a.disp(arr);
+		System.out.println();
 		
 	}
 	
