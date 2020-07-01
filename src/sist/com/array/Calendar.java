@@ -31,9 +31,8 @@ public class Calendar {
 		year = sc.nextInt();
 		System.out.println("Month-->");
 		month = sc.nextInt();
-		System.out.println(year + " "+month);
+		System.out.println("            "+year + " "+month);
 		firstDay = getCount()%7;
-		System.out.println(firstDay);
 		fillCal(firstDay);
 		disp();
 	}
