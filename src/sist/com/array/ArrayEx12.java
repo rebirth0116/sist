@@ -37,6 +37,5 @@ public class ArrayEx12 {
 		ax.disp(a);
 		int [][] b = new int [COL][ROW];
 		ax.disp(b);
-		System.out.println(Math.round(-0.5));
 	}
 }
