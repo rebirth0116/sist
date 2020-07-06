@@ -8,7 +8,7 @@ public class Person {
 
 	
 	public Person(String name) {
-		//생성자 = 클래스 이름과 같고 반환형이없다.
+		//생성자 = 클래스 이름과 같고 반환형이없다.	
 		System.out.println("Person(String)");
 		this.name = name;
 		
