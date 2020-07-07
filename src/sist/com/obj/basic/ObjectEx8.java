@@ -46,5 +46,6 @@ public class ObjectEx8 {
 		setFinal(3);
 		setFinal(2);
 		System.out.println(ObjectEx5.value);
+		
 	}
 }

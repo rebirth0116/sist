@@ -32,7 +32,9 @@ public class ActionVariableEx1 {
 		
 		boolean boolState=7>5;
 		System.out.println("boolState="+boolState);
-		
+		int[] i = new int[3];
+		i = new int[5];
+		System.out.println(i.length);
 	}
 }
 
