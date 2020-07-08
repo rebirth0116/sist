@@ -36,6 +36,7 @@ public class BookMain {
 	public void disp(Book[] bookArray) {
 		System.out.println("저자 가격 책이름 출판사 isbn");
 		for(int i = 0; i<cnt; i++) {
+			//cnt까지 출력하면데이터가 존재하는 부분까지만 출력할 수 있다
 			System.out.println(bookArray[i].toString());
 		}
 	}
@@ -83,7 +84,8 @@ public class BookMain {
 				cnt = n;
 				bm.bookArray = new Book[n];
 				for(int i = 0; i<n; i++) {
-					bm.bookArray[i] = new Book(); //bookArray에 들어갈 인스턴스 bookArray[i]생성. 생성하지않으면 주소값들이 null 이므로 오류발생
+					bm.bookArray[i] = new Book(); 
+					//bookArray에 들어갈 인스턴스 bookArray[i]생성. 생성하지않으면 주소값들이 null 이므로 오류발생
 					bm.injection(i);	
 				}
 				break;
