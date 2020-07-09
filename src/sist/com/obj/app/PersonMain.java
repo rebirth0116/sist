@@ -202,6 +202,7 @@ public class PersonMain {
 				modifySelect();
 				break;
 			case 7:
+				System.out.println("종료합니다.");
 				return;
 			default:
 				System.out.println("다시 입력하시오");
