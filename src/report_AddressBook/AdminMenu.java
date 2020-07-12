@@ -1,14 +1,14 @@
-package example;
+package report_AddressBook;
 
 import java.util.Scanner;
 
 import sist.com.obj.app.Person;
 import sist.com.variable.Main;
 
-public class AddressBook {
+public class AdminMenu {
 	Scanner sc = new Scanner(System.in);
-	Person[] people = new Person[1];
-	int cnt ;
+	static Person[] people = new Person[1];
+	static int cnt ;
 	
 	public void increment(Person[] p) {
 		Person[] temp = new Person[p.length*2];
@@ -26,19 +26,19 @@ public class AddressBook {
 			System.out.print("이름 : ");
 			person.setName(sc.next());
 			if(person.getName().length()<5) break;
-			System.out.println("다시 입력하시오");
+			System.out.println("다시 입력하시오.");
 		}
 		while(true) {
 			System.out.print("나이 : ");
 			person.setAge(sc.nextInt());
 			if(person.getAge()>0 && person.getAge()<200) break;
-			System.out.println("다시 입력하시오");
+			System.out.println("다시 입력하시오.");
 		}
 		while(true) {
 			System.out.print("국적 : ");
 			person.setNation(sc.next());
 			if(person.getNation().length()<10) break;
-			System.out.println("다시 입력하시오");
+			System.out.println("다시 입력하시오.");
 		}
 		
 		people[cnt++] = person;
@@ -134,7 +134,7 @@ public class AddressBook {
 	
 	public void searchMenu() {
 		while(true) {
-			System.out.println("1.seachName||2.searchAge||3.searchNation");
+			System.out.println("1.이름으로검색||2.나이로검색||3.국적으로검색");
 			switch(sc.nextInt()) {
 			case 1:
 				System.out.println("찾을 값");
@@ -176,9 +176,9 @@ public class AddressBook {
 	}
 	public void menu() {
 		while (true) {
-			System.out.println("================================================================");
-			System.out.println("1.add||2.delete||3.sortByAge||4.disp||5.search||6.modify||7.quit");
-			System.out.println("================================================================");
+			System.out.println("==========================================================");
+			System.out.println("1.추가||2.제거||3.나이순정렬||4.출력||5.검색||6.수정||7.메인메뉴로돌아가기");
+			System.out.println("==========================================================");
 			switch (sc.nextInt()) {
 			case 1:
 				add();
@@ -205,16 +205,16 @@ public class AddressBook {
 				modifySelect();
 				break;
 			case 7:
-				System.out.println("종료합니다.");
+				System.out.println("메인메뉴로 돌아갑니다.");
 				return;
 			default:
-				System.out.println("다시 입력하시오");
+				System.out.println("다시 입력하시오.");
 			}
 		}
 		
 	}
 	public static void main(String[] args) {
-		AddressBook a = new AddressBook();
+		AdminMenu a = new AdminMenu();
 		a.menu();
 	}
 }

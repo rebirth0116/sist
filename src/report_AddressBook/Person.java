@@ -1,4 +1,4 @@
-package example;
+package report_AddressBook;
 
 public class Person {
 	private String name, nation;
