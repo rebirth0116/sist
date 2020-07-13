@@ -2,13 +2,13 @@ package report_AddressBook;
 
 import java.util.Scanner;
 
-import sist.com.obj.app.Person;
-import sist.com.variable.Main;
 
-public class AdminMenu {
+public class AdminMenu extends Calculator{
 	Scanner sc = new Scanner(System.in);
 	static Person[] people = new Person[1];
-	static int cnt ;
+	public static int cnt ;
+	
+	
 	
 	public void increment(Person[] p) {
 		Person[] temp = new Person[p.length*2];
@@ -54,18 +54,24 @@ public class AdminMenu {
 	
 	public void disp() {
 		for(int i = 0; i<cnt; i++) {
-			System.out.println(people[i].toString());
+			System.out.println("Person " + (i+1)  + people[i].toString());
 		}
+		System.out.println("자료 갯수 = " + cnt + " 나이평균 = " + getAvg(people, getSum(people, cnt))); 
 	}
 	public boolean emptyCheck() {
 		if(cnt==0) {
 			System.out.println("입력된 데이터가 없습니다.");
 			return true;
-		}else return false;
+		} 
+		return false;
 	}
 	
 	public void sortMenu() {
 		while(true) {
+			if(cnt == 1) {
+				System.out.println("데이터가 1개이므로 정렬할 필요가 없습니다.");
+				return;
+			}
 			System.out.println("1.내림차순||2.오름차순");
 			int temp = sc.nextInt();
 			if(temp == 1 || temp == 2) {
@@ -96,6 +102,7 @@ public class AdminMenu {
 				}
 			}
 		}
+		System.out.println("정렬이 완료되었습니다.");
 	}
 	
 	public void modifySelect() {
