@@ -4,7 +4,7 @@ package report_AddressBook;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FirstLoginMenu {
+public class Main {
 	Scanner sc = new Scanner(System.in);
 	static Client[] clients = new Client[1];
 	int cnt;
@@ -109,7 +109,7 @@ public class FirstLoginMenu {
 	
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		FirstLoginMenu m = new FirstLoginMenu();
+		Main m = new Main();
 		m.menu();
 	}
 }
