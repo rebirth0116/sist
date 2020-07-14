@@ -74,13 +74,24 @@ public class AdminMenu extends Calculator{
 				System.out.println("데이터가 1개이므로 정렬할 필요가 없습니다.");
 				return;
 			}
-			System.out.println("1.내림차순||2.오름차순");
+			System.out.println("1.내림차순||2.오름차순||3.돌아가기");
 			int temp = sc.nextInt();
-			if(temp == 1 || temp == 2) {
+			switch(temp) {
+			case 1:
+			case 2:
 				sortByAge(temp);
 				return;
+			case 3:
+				return;
+			default:
+				System.out.println("다시 입력하시오.");
 			}
-			System.out.println("다시 입력하시오.");
+//			int temp = sc.nextInt();
+//			if(temp == 1 || temp == 2) {
+//				sortByAge(temp);
+//				return;
+//			}
+//			System.out.println("다시 입력하시오.");
 		}
 		
 	}
@@ -120,7 +131,7 @@ public class AdminMenu extends Calculator{
 	}
 	public void modify(int n) {
 		while(true) {
-			System.out.println("1.이름수정||2.나이수정||3.국적수정");
+			System.out.println("1.이름수정||2.나이수정||3.국적수정||4.돌아가기");
 			switch(sc.nextInt()) {
 			case 1:
 				System.out.println("수정할 값");
@@ -134,7 +145,10 @@ public class AdminMenu extends Calculator{
 				System.out.println("수정할 값");
 				people[n].setNation(sc.next());
 				return;
+			case 4:
+				return;
 			default:
+				System.out.println("다시 입력하시오.");
 				break;
 			}
 			
@@ -143,7 +157,7 @@ public class AdminMenu extends Calculator{
 	
 	public void searchMenu() {
 		while(true) {
-			System.out.println("1.이름으로검색||2.나이로검색||3.국적으로검색");
+			System.out.println("1.이름으로검색||2.나이로검색||3.국적으로검색||4.돌아가기");
 			switch(sc.nextInt()) {
 			case 1:
 				System.out.println("찾을 값");
@@ -157,7 +171,10 @@ public class AdminMenu extends Calculator{
 				System.out.println("찾을 값");
 				searchNation(sc.next());
 				return;
+			case 4:
+				return;
 			default :
+				System.out.println("다시입력하시오.");
 			}
 		}
 	}
@@ -188,9 +205,9 @@ public class AdminMenu extends Calculator{
 	}
 	public void menu() throws IOException {
 		while (true) {
-			System.out.println("===================================================================");
+			System.out.println("====================================================================");
 			System.out.println("1.추가||2.제거||3.나이순정렬||4.출력||5.검색||6.수정||7.회원관리||8.메인메뉴로돌아가기");
-			System.out.println("===================================================================");
+			System.out.println("====================================================================");
 			switch (sc.nextInt()) {
 			case 1:
 				add();
