@@ -16,6 +16,9 @@ public class Client {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
+	public String toString() {
+		return "[id=" + id + ", pw=" + pw + "]";
+	}
 	
 	
 

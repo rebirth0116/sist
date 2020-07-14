@@ -1,5 +1,6 @@
 package report_AddressBook;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientMenu extends AdminMenu{
@@ -33,8 +34,10 @@ public class ClientMenu extends AdminMenu{
 		}
 	}
 	
+
 	
-	public static void main(String[] args) {
-		new AdminMenu().menu();
+	
+	public static void main(String[] args) throws IOException {
+		new AdminMenu().menu(); //테스트용
 	}
 }

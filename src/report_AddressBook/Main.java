@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class Main {
 	Scanner sc = new Scanner(System.in);
 	static Client[] clients = new Client[1];
-	int cnt;
+	static int cnt;
+	static AdminMenu am;
+	static ClientMenu cm;
 	
 	public void menu() throws IOException  {
 		while(true) {
@@ -38,14 +40,22 @@ public class Main {
 		System.out.print("PW : ");
 		String pw = sc.next();
 		if(id.equals(Admin.getId()) && pw.equals(Admin.getPw())) {
-			new AdminMenu().menu();
+			adminMenuGetInstance().menu(); //싱글톤패턴
 		}else System.out.println("관리자 ID와 PW를 확인하십시오.");
 	}
 	
+	public static AdminMenu adminMenuGetInstance() { //싱글톤패턴
+		if(am == null) {
+			am = new AdminMenu();
+		}
+		return am;
+	}
+	
+	
 	public void clientLoginMenu() throws IOException {
-		System.out.println("=================================");
-		System.out.println("1.회원가입||2.로그인||3.초기화면으로돌아가기");
-		System.out.println("=================================");
+		System.out.println("==================================");
+		System.out.println("1.회원가입||2.로그인||3.회원탈퇴||4.돌아가기");
+		System.out.println("==================================");
 		switch(sc.nextInt()) {
 		case 1: 
 			clientSignUp();
@@ -54,11 +64,40 @@ public class Main {
 			clientLogIn();
 			break;
 		case 3:
+			clientSignOut();
+		case 4:
 			return;
 		default:
 			System.out.println("다시 입력하시오.");
 			return;
 		}
+	}
+	
+	public boolean isDuplicateId(String str) {
+		for(int i = 0; i<cnt; i++) {
+			if(clients[i].getId().equals(str)) {
+				System.out.println("이미 등록된 아이디입니다.");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void clientSignOut() {
+		System.out.println("탈퇴를 원하는 계정의 ID와 PW를 입력해주십시오.");
+		System.out.println("ID :");
+		String getId = sc.next();
+		System.out.println("PW :");
+		String getPw = sc.next();
+		for(int i = 0; i<cnt; i++) {
+			if(clients[i].getId().equals(getId) && clients[i].getPw().equals(getPw)) {
+				for(int j = i; j<cnt-1; j++) {
+					clients[j] = clients[j+1];
+				}
+			}
+		}
+		cnt--;
+		System.out.println("회원탈퇴가 완료되었습니다.");
 	}
 	
 	public void increment(Client[] p) {
@@ -75,7 +114,9 @@ public class Main {
 		Client client = new Client();
 		while(true) {
 			System.out.print("ID : ");
-			client.setId(sc.next());
+			String str = sc.next();
+			if(isDuplicateId(str)) return;	//중복 아이디 체크
+			client.setId(str);
 			if(client.getId().length()<7) break;
 			System.out.println("아이디는 6자 이하로 생성해주십시오.");
 		}
@@ -98,15 +139,18 @@ public class Main {
 		String id = sc.next();
 		System.out.print("PW : ");
 		String pw = sc.next();
-		for(int i =0; i<clients.length; i++) {
+		for(int i =0; i<cnt; i++) {
 			if(id.equals(clients[i].getId()) && pw.equals(clients[i].getPw())) {
-				new ClientMenu().menu();
+				clientMenuGetInstance().menu(); //싱글톤패턴
 				return;
 			}
 		}
 		System.out.println("ID와 PW를 확인하십시오.");
 	}
 	
+	public static ClientMenu clientMenuGetInstance() { //싱글톤패턴
+		return cm==null?new ClientMenu():cm;
+	}
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		Main m = new Main();

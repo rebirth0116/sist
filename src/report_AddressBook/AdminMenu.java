@@ -1,5 +1,6 @@
 package report_AddressBook;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -7,6 +8,7 @@ public class AdminMenu extends Calculator{
 	Scanner sc = new Scanner(System.in);
 	static Person[] people = new Person[1];
 	public static int cnt ;
+	public static ClientManageMenu cmm;
 	
 	
 	
@@ -21,7 +23,7 @@ public class AdminMenu extends Calculator{
 			increment(people);
 		}
 		
-		Person person = new Person(); //이름 나이 국적
+		Person person = new Person(); //새로운 이름 나이 국적 가진 Person 객체 생성
 		while(true) {
 			System.out.print("이름 : ");
 			person.setName(sc.next());
@@ -41,15 +43,15 @@ public class AdminMenu extends Calculator{
 			System.out.println("다시 입력하시오.");
 		}
 		
-		people[cnt++] = person;
+		people[cnt++] = person; //생성한 Person 객체를 객체배열에 추가
 		
 	}
 	
 	public void delete(int n) {
-		for(int i = n-1; i<cnt-1; i++) {
+		for(int i = n-1; i<cnt-1; i++) { //데이터 덮어쓰면서 하나씩 앞당기기
 			people[i] = people[i+1];
 		}
-		people[--cnt] = new Person();
+		cnt--; //유효객체길이 조절
 	}
 	
 	public void disp() {
@@ -58,7 +60,7 @@ public class AdminMenu extends Calculator{
 		}
 		System.out.println("자료 갯수 = " + cnt + " 나이평균 = " + getAvg(people, getSum(people, cnt))); 
 	}
-	public boolean emptyCheck() {
+	public boolean emptyCheck() { //유효데이터가 있는지 검사
 		if(cnt==0) {
 			System.out.println("입력된 데이터가 없습니다.");
 			return true;
@@ -88,13 +90,13 @@ public class AdminMenu extends Calculator{
 		for(int i =0; i<cnt; i++) {
 			for(int j = 0; j<cnt-1; j++) {
 				if(num==1) {
-					if(people[i].getAge()>people[j].getAge()) {
+					if(people[i].getAge()>people[j].getAge()) { //내림차순정렬
 						temp = people[i];
 						people[i] = people[j];
 						people[j] = temp;
 					}
 				}else if(num==2) {
-					if(people[i].getAge()<people[j].getAge()) {
+					if(people[i].getAge()<people[j].getAge()) { //오름차순정렬
 						temp = people[i];
 						people[i] = people[j];
 						people[j] = temp;
@@ -109,8 +111,8 @@ public class AdminMenu extends Calculator{
 		while(true) {
 			System.out.println("몇번째");
 			int temp = sc.nextInt();
-			if(temp>0&&temp<=cnt) {
-			modify(temp-1);
+			if(temp>0&&temp<=cnt) { //입력값이 유효데이터범위내에 있는지 확인
+			modify(temp-1); //배열은 0부터이므로 -1
 			return;
 			}
 			System.out.println("다시입력하시오.");
@@ -181,11 +183,14 @@ public class AdminMenu extends Calculator{
 			}
 		}
 	}
-	public void menu() {
+	public static ClientManageMenu clientManageMenuGetInstance() { //싱글톤패턴
+		return cmm==null?new ClientManageMenu():cmm;
+	}
+	public void menu() throws IOException {
 		while (true) {
-			System.out.println("==========================================================");
-			System.out.println("1.추가||2.제거||3.나이순정렬||4.출력||5.검색||6.수정||7.메인메뉴로돌아가기");
-			System.out.println("==========================================================");
+			System.out.println("===================================================================");
+			System.out.println("1.추가||2.제거||3.나이순정렬||4.출력||5.검색||6.수정||7.회원관리||8.메인메뉴로돌아가기");
+			System.out.println("===================================================================");
 			switch (sc.nextInt()) {
 			case 1:
 				add();
@@ -212,6 +217,9 @@ public class AdminMenu extends Calculator{
 				modifySelect();
 				break;
 			case 7:
+				clientManageMenuGetInstance().menu(); //싱글톤패턴
+				break;
+			case 8:
 				System.out.println("메인메뉴로 돌아갑니다.");
 				return;
 			default:
@@ -220,7 +228,7 @@ public class AdminMenu extends Calculator{
 		}
 		
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		AdminMenu a = new AdminMenu();
 		a.menu();
 	}

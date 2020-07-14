@@ -13,7 +13,8 @@ public class Calculator {
 	public double getAvg(Person[] p, int sum) {
 		double avg = 0;
 		
-		avg = ((double)Math.round((double)sum/AdminMenu.cnt*100)/100);
+		avg = (Math.round((double)sum/AdminMenu.cnt*100)/100.0); 
+		//소수점 둘째자리까지 표시하기위해 100곱한 후 반올림하여 int형으로 만들고 다시 double형으로 전환하기위해 100.0으로 나눈다.
 		
 		return avg;
 	}
