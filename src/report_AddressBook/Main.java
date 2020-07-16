@@ -11,6 +11,7 @@ public class Main {
 	static AdminMenu am;
 	static ClientMenu cm;
 	
+	
 	public void menu() throws IOException  {
 		while(true) {
 		System.out.println("==============================");

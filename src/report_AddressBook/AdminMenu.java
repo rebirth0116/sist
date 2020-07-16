@@ -18,6 +18,7 @@ public class AdminMenu extends Calculator{
 		people = temp;
 	}
 	
+	
 	public void add() {
 		if(cnt>=people.length) {
 			increment(people);
@@ -47,11 +48,23 @@ public class AdminMenu extends Calculator{
 		
 	}
 	
+	public void deleteSelect() {
+		while(true) {
+			System.out.println("몇번째");
+			int temp = sc.nextInt();
+			if(temp>0&&temp<=cnt) { //입력값이 유효데이터범위내에 있는지 확인
+			delete(temp-1); //배열은 0부터이므로 -1
+			return;
+			}
+			System.out.println("다시입력하시오.");
+		}
+	}
+	
 	public void delete(int n) {
-		for(int i = n-1; i<cnt-1; i++) { //데이터 덮어쓰면서 하나씩 앞당기기
+		for(int i = n; i<cnt-1; i++) { //데이터 덮어쓰면서 하나씩 앞당기기
 			people[i] = people[i+1];
 		}
-		cnt--; //유효객체길이 조절
+		cnt--;
 	}
 	
 	public void disp() {
@@ -86,14 +99,7 @@ public class AdminMenu extends Calculator{
 			default:
 				System.out.println("다시 입력하시오.");
 			}
-//			int temp = sc.nextInt();
-//			if(temp == 1 || temp == 2) {
-//				sortByAge(temp);
-//				return;
-//			}
-//			System.out.println("다시 입력하시오.");
 		}
-		
 	}
 	
 	public void sortByAge(int num) {
@@ -214,8 +220,7 @@ public class AdminMenu extends Calculator{
 				break;
 			case 2:
 				if(emptyCheck())break;
-				System.out.println("몇번째");
-				delete(sc.nextInt());
+				deleteSelect();
 				break;
 			case 3:
 				if(emptyCheck())break;
