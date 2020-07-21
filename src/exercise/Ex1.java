@@ -11,16 +11,24 @@ public class Ex1 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int[] input = new int[5];
-		for(int i = 0; i<5; i++) {
-			input[i] = Integer.parseInt(br.readLine());
-			if(input[i]<40) input[i] = 40;
+		int input = Integer.parseInt(br.readLine());
+		for(int i = 1 ; i<=2*input; i++) {
+			if(i%2==1) {
+				for(int j = 0; j<input; j++) {
+					if(j%2==1)bw.write(" ");
+					else bw.write("*");
+				}
+			}else {
+				for(int j = 0; j<input; j++) {
+					if(j%2==0)bw.write(" ");
+					else bw.write("*");
+				}
+			}
+			bw.write("\n");
+			
 		}
-		int sum  = 0;
-		for(int i = 0; i<5; i++) {
-			sum+=input[i];
-		}
-		System.out.println(sum/5);
+		bw.flush();
+		br.close();
 		
 	}
 }
