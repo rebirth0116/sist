@@ -30,16 +30,6 @@ public class ClientManageMenu extends Main{
 	}
 	
 	public void clientDisp() {
-//		for(int i = 0; i<cnt; i++) {
-//			System.out.println("Client "+(i+1)+" "+ clients[i].toString());
-//		}
-		//객체배열사용
-		
-		
-//		for(int i = 0; i<clients.size(); i++) {
-//			System.out.println("Client "+(i+1)+" "+ clients.get(i).toString());
-		//ArrayList 사용
-//		}
 		
 		Iterator<Client> itr = clients.iterator();
 		for(int i = 0; i<clients.size(); i++) {
@@ -50,7 +40,6 @@ public class ClientManageMenu extends Main{
 	
 	
 	public boolean isClientEmpty() { //회원있는지 없는지 확인
-//		if(cnt==0) {
 		if(clients.size()==0) {
 			System.out.println("가입회원이 없습니다.");
 			return true;
@@ -61,15 +50,10 @@ public class ClientManageMenu extends Main{
 	public void clientDelete() {
 		System.out.println("몇번째?");
 		int temp = sc.nextInt();
-//		if(temp>cnt) {
 		if(temp>=clients.size()) {
 			System.out.println("목록을 참고하여 다시 입력해주십시오.");
 			return;
 		}
-//		for(int i = temp-1; i<cnt-1; i++) {
-//			clients[i] = clients[i+1];
-//		}
-//		cnt--;
 		clients.remove(temp-1);
 		System.out.println("탈퇴 처리가 완료되었습니다.");
 	}

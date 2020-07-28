@@ -8,24 +8,11 @@ import java.util.Scanner;
 
 public class AdminMenu extends Calculator{
 	Scanner sc = new Scanner(System.in);
-//	static Person[] people = new Person[1];
 	static ArrayList<Person> people = new ArrayList<Person>();;
 	public static int cnt ;
 	public static ClientManageMenu cmm;
 	
-	
-	
-//	public void increment(Person[] p) {
-//		Person[] temp = new Person[p.length*2];
-//		System.arraycopy(p, 0, temp, 0, p.length);
-//		people = temp;
-//	}
-	
-	
 	public void add() {
-//		if(cnt>=people.length) {
-//			increment(people);
-//		}
 		
 		Person person = new Person(); //새로운 이름 나이 국적 가진 Person 객체 생성
 		while(true) {
@@ -55,8 +42,6 @@ public class AdminMenu extends Calculator{
 		while(true) {
 			System.out.println("몇번째");
 			int temp = sc.nextInt();
-//			if(temp>0&&temp<=cnt) { //입력값이 유효데이터범위내에 있는지 확인
-//			delete(temp-1); //배열은 0부터이므로 -1
 			if(temp>0&&temp<=people.size()) { //입력값이 유효데이터범위내에 있는지 확인
 			people.remove(temp-1); //배열은 0부터이므로 -1
 			return;
@@ -66,10 +51,6 @@ public class AdminMenu extends Calculator{
 	}
 	
 	public void delete(int n) {
-//		for(int i = n; i<cnt-1; i++) { //데이터 덮어쓰면서 하나씩 앞당기기
-//			people[i] = people[i+1];
-//		}
-//		cnt--;
 		people.remove(n);
 	}
 	
@@ -79,20 +60,10 @@ public class AdminMenu extends Calculator{
 			System.out.println("Person " + (i+1) + itr.next());
 		}
 		
-//		for(int i = 0; i<people.size(); i++) {
-////			System.out.println("Person " + (i+1)  + people[i].toString());
-//			System.out.println("Person " + (i+1)  + people.get(i));
-//		}
-		
 		System.out.println("자료 갯수 = " + people.size() + " 나이평균 = " + getAvg(people, getSum(people, people.size()))); 
 		
 	}
 	public boolean emptyCheck() { //유효데이터가 있는지 검사
-//		if(cnt==0) {
-//			System.out.println("입력된 데이터가 없습니다.");
-//			return true;
-//		} 
-//		return false;
 		if(people.size()==0) {
 			System.out.println("입력된 데이터가 없습니다.");
 			return true;
@@ -102,7 +73,6 @@ public class AdminMenu extends Calculator{
 	
 	public void sortMenu() {
 		while(true) {
-//			if(cnt == 1) {
 			if(people.size() == 1) {
 				System.out.println("데이터가 1개이므로 정렬할 필요가 없습니다.");
 				return;
@@ -124,16 +94,9 @@ public class AdminMenu extends Calculator{
 	
 	public void sortByAge(int num) {
 		Person temp;
-//		for(int i =0; i<cnt; i++) {
-//			for(int j = 0; j<cnt-1; j++) {
 		for(int i =0; i<people.size(); i++) {
 			for(int j = 0; j<people.size()-1; j++) {
 				if(num==1) {
-//					if(people[i].getAge()>people[j].getAge()) { //내림차순정렬
-//						temp = people[i];
-//						people[i] = people[j];
-//						people[j] = temp;
-//					}
 					if(people.get(i).getAge()>people.get(j).getAge()) { //내림차순정렬
 						temp = people.get(i);
 						people.set(i, people.get(j));
@@ -155,7 +118,6 @@ public class AdminMenu extends Calculator{
 		while(true) {
 			System.out.println("몇번째");
 			int temp = sc.nextInt();
-//			if(temp>0&&temp<=cnt) { //입력값이 유효데이터범위내에 있는지 확인
 			if(temp>0&&temp<=people.size()) { //입력값이 유효데이터범위내에 있는지 확인
 			modify(temp-1); //배열은 0부터이므로 -1
 			return;
@@ -169,17 +131,14 @@ public class AdminMenu extends Calculator{
 			switch(sc.nextInt()) {
 			case 1:
 				System.out.println("수정할 값");
-//				people[n].setName(sc.next());
 				people.get(n).setName(sc.next());
 				return;
 			case 2:
 				System.out.println("수정할 값");
-//				people[n].setAge(sc.nextInt());
 				people.get(n).setAge(sc.nextInt());
 				return;
 			case 3:
 				System.out.println("수정할 값");
-//				people[n].setNation(sc.next());
 				people.get(n).setNation(sc.next());
 				return;
 			case 4:
@@ -217,33 +176,21 @@ public class AdminMenu extends Calculator{
 	}
 	
 	public void searchName(String str) {
-//		for(int i = 0; i<cnt; i++) {
 		for(int i = 0; i<people.size(); i++) {
-//			if(people[i].getName().equals(str)) {
-//				System.out.println(people[i].toString());
-//			}
 			if(people.get(i).getName().equals(str)) {
 				System.out.println(people.get(i).toString());
 			}
 		}
 	}
 	public void searchAge(int n) {
-//		for(int i = 0; i<cnt; i++) {
 		for(int i = 0; i<people.size(); i++) {
-//			if(people[i].getAge()==n) {
-//				System.out.println(people[i].toString());
-//			}
 			if(people.get(i).getAge()==n) {
 				System.out.println(people.get(i).toString());
 			}
 		}
 	}
 	public void searchNation(String str) {
-//		for(int i = 0; i<cnt; i++) {
 		for(int i = 0; i<people.size(); i++) {
-//			if(people[i].getNation().equals(str)) {
-//				System.out.println(people[i].toString());
-//			}
 			if(people.get(i).getNation().equals(str)) {
 				System.out.println(people.get(i).toString());
 			}

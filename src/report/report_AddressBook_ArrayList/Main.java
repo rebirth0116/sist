@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 public class Main {
 	Scanner sc = new Scanner(System.in);
-//	static Client[] clients = new Client[1];
 	static ArrayList<Client> clients = new ArrayList<Client>();
-//	static int cnt;
 	static AdminMenu am;
 	static ClientMenu cm;
 	
@@ -77,9 +75,7 @@ public class Main {
 	}
 	
 	public boolean isDuplicateId(String str) {
-//		for(int i = 0; i<cnt; i++) {
 		for(int i = 0; i<clients.size(); i++) {
-//			if(clients[i].getId().equals(str)) {
 			if(clients.get(i).getId().equals(str)) {
 				System.out.println("이미 등록된 아이디입니다.");
 				return true;
@@ -93,37 +89,17 @@ public class Main {
 		System.out.println("ID :");
 		String getId = sc.next();
 		System.out.println("PW :");
-//		String getPw = sc.next();
-//		for(int i = 0; i<cnt; i++) {
-//			if(clients[i].getId().equals(getId) && clients[i].getPw().equals(getPw)) {
-//				for(int j = i; j<cnt-1; j++) {
-//					clients[j] = clients[j+1];
-//				}
-//			}
-//		}
-//		cnt--;
 		String getPw = sc.next();
 		for(int i = 0; i<clients.size(); i++) {
 			if(clients.get(i).getId().equals(getId) && clients.get(i).getPw().equals(getPw)) {
-//				for(int j = i; j<clients.size()-1; j++) {
-//					clients.set(j, clients.get(j+1));
-//				}
 				clients.remove(i);
 				System.out.println("회원탈퇴가 완료되었습니다.");
 			}else System.out.println("계정 정보를 다시 확인하십시오.");
 		}
 	}
 	
-//	public void increment(Client[] p) {
-//		Client[] temp = new Client[p.length*2];
-//		System.arraycopy(p, 0, temp, 0, p.length);
-//		clients = temp;
-//	}
 	public void clientSignUp() throws IOException {
 		System.out.println("회원 가입");
-//		if(cnt>=clients.length) {
-//			increment(clients);
-//		}
 		
 		Client client = new Client();
 		while(true) {
@@ -140,12 +116,10 @@ public class Main {
 			if(client.getPw().length()<12) break;
 			System.out.println("패스워드는 11자 이하로 생성해주십시오.");
 		}
-//		clients[cnt++] = client;
 		clients.add(client);
 	}
 	
 	public void clientLogIn() throws IOException {
-//		if(cnt==0) {
 		if(clients.isEmpty()) {
 			System.out.println("등록된 회원 정보가 없습니다.");
 			return;
@@ -155,9 +129,7 @@ public class Main {
 		String id = sc.next();
 		System.out.print("PW : ");
 		String pw = sc.next();
-//		for(int i =0; i<cnt; i++) {
 		for(int i =0; i<clients.size(); i++) {
-//			if(id.equals(clients[i].getId()) && pw.equals(clients[i].getPw())) {
 			if(id.equals(clients.get(i).getId()) && pw.equals(clients.get(i).getPw())) {
 				System.out.println("로그인 되었습니다.");
 				clientMenuGetInstance().menu(); //싱글톤패턴
