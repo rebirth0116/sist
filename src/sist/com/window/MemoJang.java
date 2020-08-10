@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -32,8 +35,6 @@ public class MemoJang extends JFrame implements ActionListener{
 	//  d:\\0806_icon\\closeItem.png            == 절대경로
 
 	
-	
-	
 	public void iconMake() {
 		for (int i = 0; i< icon.length; i++) {
 			icon[i] = new ImageIcon(strFile[i]);
@@ -55,15 +56,18 @@ public class MemoJang extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		if(obj==openItem) {
-			jFileChooser.showOpenDialog(this);
-			//open을 실행 했을 때, 파일열기 창이 나오게 된다.
-			//showOpenDialog의 매개변수로 component가 지정되어 있다.
-			//this의 경우 component의 후손인 JFrame을 상속받고 있기에 component타입으로 사용이 가능하다.
+//			jFileChooser.showOpenDialog(this);
+//			//open을 실행 했을 때, 파일열기 창이 나오게 된다.
+//			//showOpenDialog의 매개변수로 component가 지정되어 있다.
+//			//this의 경우 component의 후손인 JFrame을 상속받고 있기에 component타입으로 사용이 가능하다.
 			
+			openEx();
 		}
 		if(obj==saveItem) {
-			jFileChooser.showSaveDialog(this);
-			//save을 실행 했을 때, 파일저장 창이 나오게 된다.
+			saveEx();
+			
+//			jFileChooser.showSaveDialog(this);
+//			//save을 실행 했을 때, 파일저장 창이 나오게 된다.
 		}
 	}
 	//메뉴를 눌렀을 때 액션 이벤트가 발생한다.
@@ -96,8 +100,67 @@ public class MemoJang extends JFrame implements ActionListener{
 		this.setJMenuBar(jmb);
 		//메뉴바 안에 메뉴 안에 아이템
 		
+	}//저장 열기
+	
+	public void saveEx() {
+		JFileChooser jFileChooser = new JFileChooser();
+		//이 부분을 싱글톤 패턴으로 하면 될듯
+		//메소드가 끝나면 인스턴스가 사라지기 때문에 싱글톤까지 사용할 필요는 없다.
+		int state = jFileChooser.showSaveDialog(MemoJang.this);
+		//저장 창 띄우는 부분
+//		System.out.println(state);
+//		//저장 창에서 저장을 누르면 0, 취소를 누르면 1
+		
+		if(state == JFileChooser.APPROVE_OPTION) {
+			saveProcess(jFileChooser);
+		}
+
 	}
 	
+	public void saveProcess(JFileChooser jFileChooser) {
+//		System.out.println(jFileChooser.getSelectedFile());
+//		//저장 창에서 설정한 파일의 주소가 반환된다.
+		
+		try (PrintWriter pw = new PrintWriter(jFileChooser.getSelectedFile())){
+			pw.print(jTextArea.getText());
+			//textArea에 있는 text들을 쓴다.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void openEx() {
+		JFileChooser jFileChooser = new JFileChooser();
+		int state = jFileChooser.showOpenDialog(MemoJang.this);
+		if(state == JFileChooser.APPROVE_OPTION) {
+			openProcess(jFileChooser);
+		}
+	}
+	public void openProcess(JFileChooser jFileChooser) {
+		try (BufferedReader br = new BufferedReader(new FileReader(jFileChooser.getSelectedFile()))){
+			String temp = null;
+			while((temp = br.readLine())!=null) {
+				jTextArea.append(temp);
+//				jTextArea.append("\n\r");
+				//윗 줄을 추가하지 않으면, 빈칸 없이 한줄로 출력된다.
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void changeState(int state) {
+		if(state==JOptionPane.OK_OPTION) {
+			//JOptionPane.OK_OPTION는 0으로 지정되어있다.
+			saveEx();
+			System.exit(0);
+		}else if(state == JOptionPane.NO_OPTION) {
+			//JOptionPane.NO_OPTION
+			System.exit(0);
+			//전체 다 종료
+		}
+	}
 	
 	public MemoJang() {
 		iconMake();
@@ -123,28 +186,14 @@ public class MemoJang extends JFrame implements ActionListener{
 					//아니오 -> 전부 종료
 					//취소 -> 메세지 박스만 삭제
 					//result의 경우 예 = 0, 아니오 = 1, 취소 = 2
-					switch(result) {
-					case 0 :
-						jFileChooser.showSaveDialog(MemoJang.this);
-						//이 부분을 싱글톤 패턴으로 하면 될듯
-						//메소드가 끝나면 인스턴스가 사라지기 때문에 싱글톤까지 사용할 필요는 없다.
-						break;
-					case 1 : 
-						System.exit(0);
-						break;
-					default :
-					}
+					changeState(result);
 				}
 				else {
 					System.exit(0);
 					// 0 -> 정상종료, 나머지 -> 비정상 종료
 				}
-				
 			}
-			
 		});
-		
-		
 		
 		jTextArea = new JTextArea(10, 50);
 		jScrollPane = new JScrollPane(jTextArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -158,14 +207,11 @@ public class MemoJang extends JFrame implements ActionListener{
 		//DO_NOTHING_ON_CLOSE로 설정하면 아무 일도 일어나지 않도록 설정이 가능하다.
 	}
 	
-	
 	public static void main(String[] args) {
 		MemoJang m = new MemoJang();
-		
-		
 	}
 }
 //				 _______
 //    /\__/\     |     |
-//=<=<|>오 <|>=>= < 야옹   |
+//=<=<|>오 <|>=>= < 야옹 |
 //    \/ \/      |_____|
