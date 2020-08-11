@@ -1,5 +1,6 @@
 package sist.com.window;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -9,6 +10,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -25,13 +27,17 @@ public class MemoJang extends JFrame implements ActionListener{
 	JMenuBar jmb;
 	JMenu file, edit, source, window, help;
 	JMenuItem newItem, closeItem, openItem, saveItem;
+	JMenuItem copy, cut, paste;
+	JMenuItem color, font;	
 	//메뉴 - 메뉴바 - 아이템
 	//메뉴바 - 파일 편집 보기 도움말
 	//아이템 - 저장 다른이름으로저장 끝내기
+	
+	
 	ImageIcon [] icon = new ImageIcon[4];
 	String[] strFile = {"src/sist/com/window/newItem.gif","d:\\0806_icon\\closeItem.png","d:\\0806_icon\\openItem.gif","d:\\0806_icon\\saveItem.gif"};
 //	String[] strFile = {"newItem.gif","closeItem.png","openItem.gif","saveItem.gif"};
-	//  src/sist/com/window/newItem.gif         == 상대경로
+	//  src/sist/com/window/newItem.gif         == 상대경로 (해당 소스파일과 같은 폴더에 넣어져 있을 경우 사용 가능)
 	//  d:\\0806_icon\\closeItem.png            == 절대경로
 
 	
@@ -69,6 +75,25 @@ public class MemoJang extends JFrame implements ActionListener{
 //			jFileChooser.showSaveDialog(this);
 //			//save을 실행 했을 때, 파일저장 창이 나오게 된다.
 		}
+		
+		if(obj==copy) {
+			jTextArea.copy();
+		}
+		if(obj==cut) {
+			jTextArea.cut();
+		}
+		if(obj==paste) {
+			jTextArea.paste();
+		}
+		if(obj==color) {
+			Color color = JColorChooser.showDialog(this, "ColorDialog", Color.RED);
+			jTextArea.setBackground(color);
+			// 배경 화면 색을 바꾸는데, 이 때 선택창의 초기 color가 red 이다.
+		}
+		if(obj==font) {
+			new FontDialog(this);
+		}
+		
 	}
 	//메뉴를 눌렀을 때 액션 이벤트가 발생한다.
 	
@@ -88,9 +113,26 @@ public class MemoJang extends JFrame implements ActionListener{
 		file.addSeparator();
 		file.add(saveItem = new JMenuItem("SaveItem",icon[3]));
 		saveItem.addActionListener(this);
+		
 		edit = new JMenu("Edit");
+		edit.add(copy = new JMenuItem("Copy"));
+		copy.addActionListener(this);//감지자
+		edit.addSeparator();
+		edit.add(cut = new JMenuItem("Cut"));
+		cut.addActionListener(this);
+		edit.addSeparator();
+		edit.add(paste = new JMenuItem("Paste"));
+		paste.addActionListener(this);
+		
 		source = new JMenu("Source");
+		
 		window = new JMenu("Window");
+		window.add(color = new JMenuItem("Color"));
+		color.addActionListener(this);
+		window.addSeparator();
+		window.add(font = new JMenuItem("Font"));
+		font.addActionListener(this);
+		
 		help = new JMenu("Help");
 		jmb.add(file);
 		jmb.add(edit);
